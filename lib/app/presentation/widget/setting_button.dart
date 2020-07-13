@@ -10,36 +10,61 @@ class SettingButton extends StatefulWidget {
   _SettingButtonState createState() => _SettingButtonState();
 }
 
-class _SettingButtonState extends State<SettingButton> with TickerProviderStateMixin {
+class _SettingButtonState extends State<SettingButton> with SingleTickerProviderStateMixin {
   AnimationController _animationController;
   Animation _colorTween;
   @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-        onTap: (){
+  void initState() {
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 100));
+    _colorTween = ColorTween(begin: whiteColor, end: blackColor)
+        .animate(_animationController);
 
-        },
-        child: Container(
-          width: 50,
-          height: 50,
-          decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color:  this.widget.themeStore.isDark ? blackColor : whiteColor,
-              boxShadow: [
-                BoxShadow(
-                    color: this.widget.themeStore.isDark ? whiteShadowDark : whiteShadowLight,
-                    offset: Offset(-1, -1),
-                    blurRadius: 2
-                ),
-                BoxShadow(
-                    color: this.widget.themeStore.isDark ? blackShadowDark : blackShadowLight,
-                    offset: Offset(1, 1),
-                    blurRadius: 4
-                ),
-              ]
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _animationController.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (!this.widget.themeStore.isDark) {
+      _animationController.reverse();
+    } else {
+      _animationController.forward();
+    }
+    return AnimatedBuilder(
+      animation: _colorTween,
+      builder: (context, child){
+      return GestureDetector(
+          onTap: (){
+          },
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: _colorTween.value,
+                boxShadow: [
+                  BoxShadow(
+                      color: this.widget.themeStore.isDark ? whiteShadowDark : whiteShadowLight,
+                      offset: Offset(-1, -1),
+                      blurRadius: 2
+                  ),
+                  BoxShadow(
+                      color: this.widget.themeStore.isDark ? blackShadowDark : blackShadowLight,
+                      offset: Offset(1, 1),
+                      blurRadius: 4
+                  ),
+                ]
+            ),
+            child: Icon(Icons.settings, size: 30, color: orangeColor,),
           ),
-          child: Icon(Icons.settings, size: 30, color: orangeColor,),
-        ),
-      );
+        );
+      },
+    );
   }
 }
