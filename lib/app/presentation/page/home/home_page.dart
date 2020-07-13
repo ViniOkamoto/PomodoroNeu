@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pomodoroapp/shared/components/app_bar.dart';
-import 'package:pomodoroapp/shared/utils/DarkLightMode/store/theme_store.dart';
-import 'package:pomodoroapp/shared/utils/constants.dart';
+import 'package:pomodoroapp/app/presentation/viewmodel/theme/theme_store.dart';
+import 'package:pomodoroapp/app/presentation/widget/app_bar.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,7 +43,6 @@ class _HomePageState extends State<HomePage> {
   }
   @override
   Widget build(BuildContext context) {
-  var themeData = Theme.of(context).copyWith(scaffoldBackgroundColor: Colors.black);
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
@@ -54,11 +52,37 @@ class _HomePageState extends State<HomePage> {
               ? Icon(Icons.brightness_high)
               : Icon(Icons.brightness_2),
         ),
-        appBar: MyCustomAppBar(),
-        backgroundColor: whiteColor,
-        body: AnnotatedRegion<SystemUiOverlayStyle>(
-          value: themeStore.isDark ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark,
-          child: Container(),
+        appBar: MyCustomAppBar(themeStore),
+        body: buildSplash(context),
+      ),
+    );
+  }
+
+  Widget buildSplash(BuildContext context) {
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: themeStore.isDark
+          ? SystemUiOverlayStyle.light
+          : SystemUiOverlayStyle.dark,
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Foodie",
+              style: TextStyle(fontSize: 26),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Text(
+              "The best way to track your nutrition.",
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
         ),
       ),
     );

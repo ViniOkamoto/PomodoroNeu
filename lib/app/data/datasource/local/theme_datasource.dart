@@ -1,11 +1,16 @@
 import 'dart:ui';
 
 
-import 'package:pomodoroapp/shared/utils/DarkLightMode/interface/i_theme_repository.dart';
-import 'package:pomodoroapp/shared/utils/DarkLightMode/theme_key.dart';
+import 'package:pomodoroapp/app/domain/repositories/theme_repository.dart';
+import 'package:pomodoroapp/core/values/theme_key.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ThemeRepository implements IThemeRepository {
+abstract class IThemeDatasource{
+  Future<void> setThemeKey(Brightness brightness);
+  Future<String> getThemeKey();
+}
+
+class ThemeDatasource implements IThemeDatasource{
   @override
   Future<void> setThemeKey(Brightness brightness) async {
     (await SharedPreferences.getInstance()).setString(

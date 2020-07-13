@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/shared/utils/DarkLightMode/interface/i_theme_repository.dart';
-import 'package:pomodoroapp/shared/utils/constants.dart';
+import 'package:pomodoroapp/app/domain/repositories/theme_repository.dart';
+import 'package:pomodoroapp/core/di/service_locator.dart';
+import 'package:pomodoroapp/core/values/colors.dart';
 
-class ThemeService {
-  ThemeService(IThemeRepository themeRepository)
-      : _themeRepository = themeRepository;
+class ThemeUseCase {
+  ThemeRepository _themeRepository = serviceLocator<ThemeRepository>();
 
-  IThemeRepository _themeRepository;
-
+//  ThemeData get lightTheme => ThemeData(
+//    primarySwatch: Colors.teal,
+//    accentColor: Colors.deepPurpleAccent,
+//    brightness: Brightness.light,
+//    scaffoldBackgroundColor: Color(0xFFecf0f1),
+//  );
+//
+//  ThemeData get darkTheme => ThemeData(
+//    primarySwatch: Colors.teal,
+//    accentColor: Colors.tealAccent,
+//    brightness: Brightness.dark,
+//  );
   ThemeData get lightTheme => ThemeData(
-    primarySwatch: orangeColor,
+    primarySwatch: Colors.orange,
     brightness: Brightness.light,
     scaffoldBackgroundColor: whiteColor,
     visualDensity: VisualDensity.comfortable,
   );
 
   ThemeData get darkTheme => ThemeData(
-    primarySwatch: orangeColor,
+    primarySwatch: Colors.orange,
     brightness: Brightness.dark,
+    scaffoldBackgroundColor: blackColor,
     visualDensity: VisualDensity.comfortable,
   );
   Future<ThemeData> getTheme() async {
