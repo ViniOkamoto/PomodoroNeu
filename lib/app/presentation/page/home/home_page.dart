@@ -72,14 +72,14 @@ class _HomePageState extends State<HomePage> {
               height: 20,
             ),
             Text(
-              "Foodie",
+              "Pudim",
               style: TextStyle(fontSize: 26),
             ),
             SizedBox(
               height: 4,
             ),
             Text(
-              "The best way to track your nutrition.",
+              "Gostosin demais",
               style: TextStyle(fontSize: 16),
             ),
           ],

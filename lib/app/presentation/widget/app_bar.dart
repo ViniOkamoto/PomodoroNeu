@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoroapp/app/presentation/widget/setting_button.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 import 'package:pomodoroapp/core/values/fonts.dart';
@@ -38,7 +39,11 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ],
             ),
-            SettingButton(themeStore)
+            Observer(
+              builder: (_){
+                return SettingButton(themeStore.isDark);
+              },
+            )
           ],
         ),
       ),
