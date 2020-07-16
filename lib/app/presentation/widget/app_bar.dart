@@ -40,7 +40,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ],
             ),
             Observer(
-              builder: (_){
+              builder: (context){
                 return SettingButton(themeStore.isDark);
               },
             )

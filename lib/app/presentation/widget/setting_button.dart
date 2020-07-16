@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pomodoroapp/app/presentation/widget/concave_decoration.dart';
@@ -11,12 +10,26 @@ class SettingButton extends StatefulWidget {
   _SettingButtonState createState() => _SettingButtonState();
 }
 
-class _SettingButtonState extends State<SettingButton> with SingleTickerProviderStateMixin {
+class _SettingButtonState extends State<SettingButton>
+    with SingleTickerProviderStateMixin {
+  //Configs to dropdown container
+  //this key will catch renderbox options of the father component.
+  GlobalKey actionKey;
+  double height, width, xPosition, yPosition;
+  OverlayEntry floatingDropDown;
+  // ends
   bool _isPressed = false;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    actionKey = LabeledGlobalKey("Settings");
+    // TODO: implement initState
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    print("No settings buton${this.widget.isDark}");
     final dropShadow = BoxDecoration(
         shape: BoxShape.circle,
         color: this.widget.isDark ? blackColor : whiteColor,
@@ -24,35 +37,109 @@ class _SettingButtonState extends State<SettingButton> with SingleTickerProvider
           BoxShadow(
               color: this.widget.isDark ? whiteShadowDark : whiteShadowLight,
               offset: Offset(-1, -1),
-              blurRadius: 2
-          ),
+              blurRadius: 4),
           BoxShadow(
               color: this.widget.isDark ? blackShadowDark : blackShadowLight,
               offset: Offset(1, 1),
-              blurRadius: 4
-          ),
-        ]
-    );
+              blurRadius: 4),
+        ]);
     final innerShadow = ConcaveDecoration(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(50),
+        ),
+        colors: [
+          this.widget.isDark ? whiteShadowDark : whiteShadowLight,
+          this.widget.isDark ? blackShadowDark : blackShadowLight
+        ],
+        depth: 7,
+        opacity: 0.3);
+    return GestureDetector(
+      key: actionKey,
+      onTap: () {
+        setState(() {
+          if (_isPressed) {
+            floatingDropDown.remove();
+          } else {
+            findDropdownData();
+            floatingDropDown = _createFloatingDropdown();
+            Overlay.of(context).insert(floatingDropDown);
+          }
+          _isPressed = !_isPressed;
+        });
+      },
+      child: Container(
+        width: 50,
+        height: 50,
+        decoration: _isPressed ? innerShadow : dropShadow,
+        child: Icon(
+          Icons.settings,
+          size: 30,
+          color: orangeColor,
+        ),
       ),
-      colors: [this.widget.isDark ? whiteShadowDark : whiteShadowLight, this.widget.isDark ? blackShadowDark : blackShadowLight],
-      depth: 7,
-      opacity: 0.3
     );
-      return GestureDetector(
-          onTap: (){
-            setState(() {
-             _isPressed =  _isPressed ? false : true;
-            });
-          },
-          child: Container(
-            width: 50,
-            height: 50,
-            decoration: _isPressed ? innerShadow : dropShadow,
-            child: Icon(Icons.settings, size: 30, color: orangeColor,),
-          ),
-        );
+  }
+
+  OverlayEntry _createFloatingDropdown() {
+    return OverlayEntry(builder: (context) {
+      return Positioned(
+        left: xPosition - width ,
+        top: yPosition + height,
+        width: 80,
+        //2 is the quantities of elements in my dropdown list
+        height: 2 * height + 40,
+        child: DropDown(
+         isDark: this.widget.isDark,
+         itemHeight: height,
+        )
+      );
+    });
+  }
+
+  void findDropdownData() {
+    //Here i find my object and catching renders info about it.
+    RenderBox renderBox = actionKey.currentContext.findRenderObject();
+    height = renderBox.size.height;
+    width = renderBox.size.width;
+    //Here I take the exact point where the widget is.
+    Offset offset = renderBox.localToGlobal(Offset.zero);
+    xPosition = offset.dx;
+    yPosition = offset.dy;
+
   }
 }
+
+class DropDown extends StatelessWidget {
+
+  final double itemHeight;
+  final bool isDark;
+  DropDown({Key key, this.itemHeight, this.isDark}) : super (key:key);
+  @override
+  Widget build(BuildContext context) {
+    print("No drop tá isso $isDark");
+    return Column(
+      children: <Widget>[
+        SizedBox(
+          height: 5,
+        ),
+        Container(
+          height: 2 * this.itemHeight,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: this.isDark ? blackColor : whiteColor,
+              boxShadow: [
+                BoxShadow(
+                    color: this.isDark ? whiteShadowDark : whiteShadowLight,
+                    offset: Offset(-1, -1),
+                    blurRadius: 4),
+                BoxShadow(
+                    color: this.isDark ? blackShadowDark : blackShadowLight,
+                    offset: Offset(1, 1),
+                    blurRadius: 4),
+              ])
+        )
+      ],
+    );
+  }
+}
+

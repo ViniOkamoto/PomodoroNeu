@@ -13,7 +13,7 @@ const greyPrimaryColor = const Color(0xff868383);
 const greySecondaryColor = const Color(0xffB6B2B2);
 //Shadows Drop
 const whiteShadowLight = const Color(0xCCFFFFFF);
-const whiteShadowDark = const Color(0x4DFFFFFF);
-const blackShadowLight = const Color(0x4D000000);
+const whiteShadowDark = const Color(0x73FFFFFF);
+const blackShadowLight = const Color(0x73000000);
 const blackShadowDark = const Color(0x4D000000);
 //Shadows Inner
