@@ -12,6 +12,7 @@ const greenColor = const Color(0xff31DA56);
 const greyPrimaryColor = const Color(0xff868383);
 const greySecondaryColor = const Color(0xffB6B2B2);
 //Shadows Drop
+const whitecolors = Colors.white;
 const whiteShadowLight = const Color(0xCCFFFFFF);
 const whiteShadowDark = const Color(0x73FFFFFF);
 const blackShadowLight = const Color(0x73000000);
