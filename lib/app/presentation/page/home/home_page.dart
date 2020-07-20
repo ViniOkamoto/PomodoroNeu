@@ -1,8 +1,12 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pomodoroapp/app/presentation/page/home/widget/circle_counter.dart';
 import 'package:pomodoroapp/app/presentation/viewmodel/theme/theme_store.dart';
 import 'package:pomodoroapp/app/presentation/widget/app_bar.dart';
+import 'package:pomodoroapp/core/values/colors.dart';
+import 'package:pomodoroapp/core/values/drop_shadow.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -63,28 +67,48 @@ class _HomePageState extends State<HomePage> {
       value: themeStore.isDark
           ? SystemUiOverlayStyle.light
           : SystemUiOverlayStyle.dark,
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Pudim",
-              style: TextStyle(fontSize: 26),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Text(
-              "Gostosin demais",
-              style: TextStyle(fontSize: 16),
-            ),
-          ],
-        ),
-      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+             Stack(
+               alignment: AlignmentDirectional.center,
+               children: <Widget>[
+                 Container(
+                   margin: EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+                   width: MediaQuery.of(context).size.width * 0.89,
+                   height: MediaQuery.of(context).size.height * 0.5,
+                   decoration: dropShadow(
+                       colorWidget: themeStore.isDark ? blackColor : whiteColor,
+                       blackShadowColor: themeStore.isDark ? blackShadowDark : blackShadowLight,
+                       whiteShadowColor: themeStore.isDark ? whiteShadowDark : whiteShadowLight
+                   ),
+                 ),
+                 CustomPaint(
+                   foregroundPainter: CircleCounter(),
+                   child: Container(
+                     height: MediaQuery.of(context).size.height * 0.5,
+                     width: MediaQuery.of(context).size.width * 0.78,
+                   ),
+                 ),
+                 Container(
+                   margin: EdgeInsets.symmetric(horizontal: 22, vertical: 15),
+                   width: MediaQuery.of(context).size.width * 0.71,
+                   height: MediaQuery.of(context).size.height * 0.5,
+                   decoration: dropShadow(
+                       colorWidget: blackColor,
+                       blackShadowColor: themeStore.isDark ? blackShadowDark : blackShadowLight,
+                       whiteShadowColor: themeStore.isDark ? whiteShadowDark : whiteShadowLight
+                   ),
+                 ),
+               ],
+             )
+            ],
+          )
+        ],
+      )
     );
   }
 
