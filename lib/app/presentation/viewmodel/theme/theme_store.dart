@@ -18,7 +18,6 @@ abstract class _ThemeStore with Store {
 
   @action
   Future<void> getTheme() async {
-    theme = _themeUseCase.lightTheme;
     theme = await _themeUseCase.getTheme();
   }
 

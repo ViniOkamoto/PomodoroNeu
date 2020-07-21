@@ -18,13 +18,19 @@ class PomodoroApp extends StatelessWidget{
       ],
       child: Consumer<ThemeStore>(
         builder: (_, ThemeStore value, __) => Observer(
-          builder: (_) => MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: APP_NAME,
-            theme: value.theme,
-            onGenerateRoute: Router.generateRoute,
-            initialRoute: Routes.homePage,
-          ),
+          builder: (_) {
+            if(value.theme != null){
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: APP_NAME,
+              theme: value.theme,
+              onGenerateRoute: Router.generateRoute,
+              initialRoute: Routes.homePage,
+            );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          }
         ),
       ),
     );

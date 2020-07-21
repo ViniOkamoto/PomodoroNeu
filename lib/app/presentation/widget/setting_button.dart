@@ -29,7 +29,6 @@ class _SettingButtonState extends State<SettingButton>
 
   @override
   Widget build(BuildContext context) {
-    print("No settings buton${this.widget.isDark}");
     final dropShadow = BoxDecoration(
         shape: BoxShape.circle,
         color: this.widget.isDark ? blackColor : whiteColor,

@@ -5,29 +5,38 @@ import 'package:flutter/material.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 
 class CircleCounter extends CustomPainter{
-  CircleCounter();
+  CircleCounter({
+    @required this.animation,
+    @required this.backgroundColor,
+    @required this.color,
+  }) : super(repaint: animation);
+
+  /// Animation representing what we are painting
+  final Animation<double> animation;
+
+  /// The color in the background of the circle
+  final Color backgroundColor;
+
+  /// The foreground color used to indicate progress
+  final Color color;
+
   @override
-  void paint(Canvas canvas, Size size){
-    Paint outerCircle = Paint()
-      ..strokeWidth = 14
-      ..color = orangeColor
+  void paint(Canvas canvas, Size size) {
+    Paint paint = new Paint()
+      ..color = backgroundColor
+      ..strokeWidth = 15.0
+      ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
-
-
-    Paint completeArc = Paint()
-    ..strokeWidth = 1
-    ..style = PaintingStyle.stroke
-    ..strokeCap = StrokeCap.round;
-
-    Offset center = Offset(size.width/2, size.height/2);
-    double radius = min(size.width/2, size.height/2) - 7;
-    
-    canvas.drawCircle(center, radius, outerCircle);
+    canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
+    paint.color = color;
+    double progress = (1.0 - animation.value) * 2 * pi;
+    canvas.drawArc(Offset.zero & size, pi * 1.5, -progress, false, paint);
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    // TODO: implement shouldRepaint
-    throw UnimplementedError();
+  bool shouldRepaint(CircleCounter other) {
+    return animation.value != other.animation.value ||
+        color != other.color ||
+        backgroundColor != other.backgroundColor;
   }
 }
