@@ -1,18 +1,17 @@
-
 import 'package:flutter/material.dart';
 
-dropShadow({colorWidget, whiteShadowColor, blackShadowColor}){
+dropShadow({colorWidget, topColor, bottomColor}){
   return BoxDecoration(
       shape: BoxShape.circle,
       color: colorWidget,
       boxShadow: [
         BoxShadow(
-            color: whiteShadowColor,
+            color: topColor,
             offset: Offset(-1, -1),
             blurRadius: 4),
         BoxShadow(
-            color: blackShadowColor,
-            offset: Offset(1, 1),
-            blurRadius: 4),
+            color: bottomColor,
+            offset: Offset(3, 3),
+            blurRadius: 10),
       ]);
 }

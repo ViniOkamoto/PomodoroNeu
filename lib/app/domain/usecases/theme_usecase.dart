@@ -36,20 +36,13 @@ class ThemeUseCase {
 
     if (themeKey == null) {
       await _themeRepository.setThemeKey(lightTheme.brightness);
-
       return lightTheme;
-    } else {
-      return themeKey == "light" ? lightTheme : darkTheme;
     }
+      return themeKey == "light" ? lightTheme : darkTheme;
   }
 
-  Future<ThemeData> toggleTheme(ThemeData theme) async {
-    if (theme == lightTheme) {
-      theme = darkTheme;
-    } else {
-      theme = lightTheme;
-    }
-
+  Future<ThemeData> toggleTheme(ThemeData theme, isDark) async {
+    theme = isDark ? darkTheme : lightTheme;
     await _themeRepository.setThemeKey(theme.brightness);
     return theme;
   }

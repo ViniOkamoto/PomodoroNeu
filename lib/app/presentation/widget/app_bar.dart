@@ -7,6 +7,7 @@ import 'package:pomodoroapp/core/values/fonts.dart';
 
 class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final themeStore;
+
   MyCustomAppBar(this.themeStore);
 
   @override
@@ -16,7 +17,7 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? SystemUiOverlayStyle.light
           : SystemUiOverlayStyle.dark,
       child: Padding(
-        padding: EdgeInsets.only(top: 23, left: 12, right: 12 ),
+        padding: EdgeInsets.only(top: 23, left: 12, right: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
@@ -26,24 +27,25 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 Text(
                   "Okamoto",
                   style: TextStyle(
-                  fontSize: smallFontSize,
-                  color: greySecondaryColor
+                      fontSize: smallFontSize,
+                      color: greySecondaryColor
                   ),
                 ),
                 Text(
                   "Pomodoro",
-                  style: TextStyle(
-                      fontSize: mediumFontSize,
-                      color: orangeColor
-                  ),
+                  style:
+                      TextStyle(
+                          fontSize: mediumFontSize,
+                          color: orangeColor
+                      ),
                 ),
               ],
             ),
             Observer(
-              builder: (context){
+              builder: (context) {
                 return SettingButton(themeStore.isDark);
               },
-            )
+            ),
           ],
         ),
       ),
@@ -51,6 +53,5 @@ class MyCustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  // TODO: implement preferredSize
-  @override  Size get preferredSize => Size.fromHeight(80);
+  Size get preferredSize => Size.fromHeight(80);
 }

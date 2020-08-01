@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:pomodoroapp/app/presentation/widget/concave_decoration.dart';
+import 'package:pomodoroapp/app/presentation/widget/dropdown/drop_down.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 
 class SettingButton extends StatefulWidget {
@@ -29,6 +29,7 @@ class _SettingButtonState extends State<SettingButton>
 
   @override
   Widget build(BuildContext context) {
+    print("${this.widget.isDark} aqui no setting");
     final dropShadow = BoxDecoration(
         shape: BoxShape.circle,
         color: this.widget.isDark ? blackColor : whiteColor,
@@ -88,7 +89,6 @@ class _SettingButtonState extends State<SettingButton>
         //2 is the quantities of elements in my dropdown list
         height: 2 * height + 40,
         child: DropDown(
-         isDark: this.widget.isDark,
          itemHeight: height,
         )
       );
@@ -108,37 +108,5 @@ class _SettingButtonState extends State<SettingButton>
   }
 }
 
-class DropDown extends StatelessWidget {
 
-  final double itemHeight;
-  final bool isDark;
-  DropDown({Key key, this.itemHeight, this.isDark}) : super (key:key);
-  @override
-  Widget build(BuildContext context) {
-    print("No drop tá isso $isDark");
-    return Column(
-      children: <Widget>[
-        SizedBox(
-          height: 5,
-        ),
-        Container(
-          height: 2 * this.itemHeight,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              color: this.isDark ? blackColor : whiteColor,
-              boxShadow: [
-                BoxShadow(
-                    color: this.isDark ? whiteShadowDark : whiteShadowLight,
-                    offset: Offset(-1, -1),
-                    blurRadius: 4),
-                BoxShadow(
-                    color: this.isDark ? blackShadowDark : blackShadowLight,
-                    offset: Offset(1, 1),
-                    blurRadius: 4),
-              ])
-        )
-      ],
-    );
-  }
-}
 
