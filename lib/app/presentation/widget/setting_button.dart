@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pomodoroapp/app/presentation/widget/concave_decoration.dart';
 import 'package:pomodoroapp/app/presentation/widget/dropdown/drop_down.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
+import 'package:pomodoroapp/core/values/styles.dart';
 
 class SettingButton extends StatefulWidget {
   final isDark;
+
   SettingButton(this.isDark);
+
   @override
   _SettingButtonState createState() => _SettingButtonState();
 }
@@ -17,6 +20,7 @@ class _SettingButtonState extends State<SettingButton>
   GlobalKey actionKey;
   double height, width, xPosition, yPosition;
   OverlayEntry floatingDropDown;
+
   // ends
   bool _isPressed = false;
 
@@ -29,30 +33,6 @@ class _SettingButtonState extends State<SettingButton>
 
   @override
   Widget build(BuildContext context) {
-    print("${this.widget.isDark} aqui no setting");
-    final dropShadow = BoxDecoration(
-        shape: BoxShape.circle,
-        color: this.widget.isDark ? blackColor : whiteColor,
-        boxShadow: [
-          BoxShadow(
-              color: this.widget.isDark ? whiteShadowDark : whiteShadowLight,
-              offset: Offset(-1, -1),
-              blurRadius: 4),
-          BoxShadow(
-              color: this.widget.isDark ? blackShadowDark : blackShadowLight,
-              offset: Offset(1, 1),
-              blurRadius: 4),
-        ]);
-    final innerShadow = ConcaveDecoration(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(50),
-        ),
-        colors: [
-          this.widget.isDark ? whiteShadowDark : whiteShadowLight,
-          this.widget.isDark ? blackShadowDark : blackShadowLight
-        ],
-        depth: 7,
-        opacity: 0.3);
     return GestureDetector(
       key: actionKey,
       onTap: () {
@@ -65,12 +45,25 @@ class _SettingButtonState extends State<SettingButton>
             Overlay.of(context).insert(floatingDropDown);
           }
           _isPressed = !_isPressed;
-        });
+        }
+        );
       },
       child: Container(
         width: 50,
         height: 50,
-        decoration: _isPressed ? innerShadow : dropShadow,
+        decoration: _isPressed
+            ? innerShadow(
+          bottomColor: this.widget.isDark ? whiteShadow30Dark : whiteShadow100Light,
+          topColor: this.widget.isDark ? blackShadow30Dark : blackShadow10Light
+        )
+            : tertiaryDropShadow(
+                shape: BoxShape.circle,
+                colorWidget: this.widget.isDark ? blackColor : whiteColor,
+                bottomColor:
+                    this.widget.isDark ? blackShadow30Dark : blackShadow10Light,
+                topColor:
+                    this.widget.isDark ? whiteShadow30Dark : whiteShadow100Light,
+              ),
         child: Icon(
           Icons.settings,
           size: 30,
@@ -83,15 +76,14 @@ class _SettingButtonState extends State<SettingButton>
   OverlayEntry _createFloatingDropdown() {
     return OverlayEntry(builder: (context) {
       return Positioned(
-        left: xPosition - width ,
-        top: yPosition + height,
-        width: 80,
-        //2 is the quantities of elements in my dropdown list
-        height: 2 * height + 40,
-        child: DropDown(
-         itemHeight: height,
-        )
-      );
+          left: xPosition - width,
+          top: yPosition + height,
+          width: 80,
+          //2 is the quantities of elements in my dropdown list
+          height: 2 * height + 40,
+          child: DropDown(
+            itemHeight: height,
+          ));
     });
   }
 
@@ -104,9 +96,5 @@ class _SettingButtonState extends State<SettingButton>
     Offset offset = renderBox.localToGlobal(Offset.zero);
     xPosition = offset.dx;
     yPosition = offset.dy;
-
   }
 }
-
-
-

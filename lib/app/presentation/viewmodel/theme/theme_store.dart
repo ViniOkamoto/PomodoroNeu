@@ -22,7 +22,12 @@ abstract class _ThemeStore with Store {
   }
 
   @action
-  Future<void> toggleTheme() async {
-    theme = await _themeUseCase.toggleTheme(theme);
+  Future<void> switchLightTheme() async {
+    theme = await _themeUseCase.toggleTheme(theme, false);
+  }
+
+  @action
+  Future<void> switchDarkTheme() async {
+    theme = await _themeUseCase.toggleTheme(theme, true);
   }
 }

@@ -24,11 +24,11 @@ class DropDown extends StatelessWidget {
             color: isDark ? blackColor : whiteColor,
             boxShadow: [
               BoxShadow(
-                  color: isDark ? whiteShadowDark : whiteShadowLight,
+                  color: isDark ? whiteShadow30Dark : whiteShadow100Light,
                   offset: Offset(-1, -1),
                   blurRadius: 4),
               BoxShadow(
-                  color: isDark ? blackShadowDark : blackShadowLight,
+                  color: isDark ? blackShadow30Dark : blackShadow10Light,
                   offset: Offset(1, 1),
                   blurRadius: 4),
             ],
