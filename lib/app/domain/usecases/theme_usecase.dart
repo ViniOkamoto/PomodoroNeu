@@ -23,6 +23,7 @@ class ThemeUseCase {
     brightness: Brightness.light,
     scaffoldBackgroundColor: whiteColor,
     visualDensity: VisualDensity.comfortable,
+    fontFamily: "Maven Pro"
   );
 
   ThemeData get darkTheme => ThemeData(
@@ -30,6 +31,7 @@ class ThemeUseCase {
     brightness: Brightness.dark,
     scaffoldBackgroundColor: blackColor,
     visualDensity: VisualDensity.comfortable,
+    fontFamily: "Maven Pro",
   );
   Future<ThemeData> getTheme() async {
     final String themeKey = await _themeRepository.getThemeKey();
