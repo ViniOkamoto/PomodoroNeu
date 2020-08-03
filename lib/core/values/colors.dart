@@ -17,9 +17,7 @@ const darkTextCounterGreyColor = const Color(0xffDDDCDC);
 
 //Shadows
 const whiteShadow100Light = const Color(0xffFFFFFF);
-const whiteShadow30Dark = const Color(0x4DFFFFFF);
 const blackShadow10Light = const Color(0x26000000);
+const blackShadow30Light = const Color(0x4D000000);
 const blackShadow30Dark = const Color(0x4D000000);
-
-//SHADOWS
-const blackShadow40Light = const Color(0x4D000000);
+const whiteShadow30Dark = const Color(0x4DFFFFFF);

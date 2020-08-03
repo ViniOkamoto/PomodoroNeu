@@ -12,10 +12,27 @@ mainDropShadow({colorWidget, topColor, bottomColor}) {
   );
 }
 
+secondaryDropShadow(
+    {@required colorWidget,
+      @required topColor,
+      @required bottomColor,
+      shape,
+      borderRadius = null
+    }) {
+  return BoxDecoration(
+      shape: shape,
+      color: colorWidget,
+      borderRadius: borderRadius,
+      boxShadow: [
+        BoxShadow(color: topColor, offset: Offset(-1, -1), blurRadius: 2),
+        BoxShadow(color: bottomColor, offset: Offset(2, 2), blurRadius: 10),
+      ]);
+}
+
 tertiaryDropShadow(
-    {colorWidget,
-      topColor,
-      bottomColor,
+    {@required colorWidget,
+      @required topColor,
+      @required bottomColor,
       shape,
       borderRadius = null
     }) {
@@ -26,24 +43,6 @@ tertiaryDropShadow(
       boxShadow: [
         BoxShadow(color: topColor, offset: Offset(-2, -1), blurRadius: 2),
         BoxShadow(color: bottomColor, offset: Offset(3, 2), blurRadius: 4),
-      ]);
-}
-
-
-secondaryDropShadow(
-    {colorWidget,
-      topColor,
-      bottomColor,
-      shape,
-      borderRadius = null
-    }) {
-  return BoxDecoration(
-      shape: shape,
-      color: colorWidget,
-      borderRadius: borderRadius,
-      boxShadow: [
-        BoxShadow(color: topColor, offset: Offset(-1, -1), blurRadius: 2),
-        BoxShadow(color: bottomColor, offset: Offset(2, 2), blurRadius: 4),
       ]);
 }
 
