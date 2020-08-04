@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/app/presentation/widget/concave_decoration.dart';
 import 'package:pomodoroapp/app/presentation/widget/dropdown/drop_down.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 import 'package:pomodoroapp/core/values/styles.dart';
@@ -52,7 +51,7 @@ class _SettingButtonState extends State<SettingButton>
         width: 50,
         height: 50,
         decoration: _isPressed
-            ? innerShadow(
+            ? secundaryInnerShadow(
           bottomColor: this.widget.isDark ? whiteShadow30Dark : whiteShadow100Light,
           topColor: this.widget.isDark ? blackShadow30Dark : blackShadow10Light
         )
