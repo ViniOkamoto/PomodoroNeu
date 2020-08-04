@@ -14,11 +14,10 @@ mainDropShadow({colorWidget, topColor, bottomColor}) {
 
 secondaryDropShadow(
     {@required colorWidget,
-      @required topColor,
-      @required bottomColor,
-      shape,
-      borderRadius = null
-    }) {
+    @required topColor,
+    @required bottomColor,
+    shape,
+    borderRadius = null}) {
   return BoxDecoration(
       shape: shape,
       color: colorWidget,
@@ -31,11 +30,10 @@ secondaryDropShadow(
 
 tertiaryDropShadow(
     {@required colorWidget,
-      @required topColor,
-      @required bottomColor,
-      shape,
-      borderRadius = null
-    }) {
+    @required topColor,
+    @required bottomColor,
+    shape,
+    borderRadius = null}) {
   return BoxDecoration(
       shape: shape,
       color: colorWidget,
@@ -46,12 +44,35 @@ tertiaryDropShadow(
       ]);
 }
 
-innerShadow({topColor, bottomColor}) {
+inputInnerShadow({topColor, bottomColor}) {
   return ConcaveDecoration(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(50),
       ),
       colors: [bottomColor, topColor],
-      depth: 7,
-      opacity: 0.3);
+      depth: 4,
+      opacityTop: 0.3,
+      opacityBottom: 0.8);
+}
+
+listInnerShadow({topColor, bottomColor}) {
+  return ConcaveDecoration(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10),
+      ),
+      colors: [bottomColor, topColor],
+      depth: 4,
+      opacityTop: 0.3,
+      opacityBottom: 0.8);
+}
+secundaryInnerShadow({topColor, bottomColor}) {
+  return ConcaveDecoration(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(50),
+    ),
+    colors: [bottomColor, topColor],
+    depth: 7,
+    opacityTop: 0.3,
+    opacityBottom: 0.3,
+  );
 }

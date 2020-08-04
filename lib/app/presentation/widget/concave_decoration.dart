@@ -6,17 +6,18 @@ class ConcaveDecoration extends Decoration {
   final ShapeBorder shape;
   final double depth;
   final List<Color> colors;
-  final double opacity;
-
+  final  double opacityTop;
+  final double opacityBottom;
   ConcaveDecoration({
     @required this.shape,
     @required this.depth,
     this.colors = const [Colors.black87, Colors.white],
-    this.opacity = 1.0,
+    this.opacityTop = 1.0,
+    this.opacityBottom = 1.0,
   }) : assert(shape != null), assert(colors == null || colors.length == 2);
 
   @override
-  BoxPainter createBoxPainter([onChanged]) => _ConcaveDecorationPainter(shape, depth, colors, opacity);
+  BoxPainter createBoxPainter([onChanged]) => _ConcaveDecorationPainter(shape, depth, colors, opacityTop, opacityBottom);
 
   @override
   EdgeInsetsGeometry get padding => shape.dimensions;
@@ -32,7 +33,8 @@ class ConcaveDecoration extends Decoration {
           Color.lerp(a.colors[0], colors[0], t),
           Color.lerp(a.colors[1], colors[1], t),
         ],
-        opacity: ui.lerpDouble(a.opacity, opacity, t),
+        opacityTop: ui.lerpDouble(a.opacityTop, opacityTop, t),
+        opacityBottom: ui.lerpDouble(a.opacityBottom, opacityBottom, t),
       );
     }
     return null;
@@ -43,9 +45,10 @@ class _ConcaveDecorationPainter extends BoxPainter {
   ShapeBorder shape;
   double depth;
   List<Color> colors;
-  double opacity;
+  double opacityTop;
+  double opacityBottom;
 
-  _ConcaveDecorationPainter(this.shape, this.depth, this.colors, this.opacity) {
+  _ConcaveDecorationPainter(this.shape, this.depth, this.colors, this.opacityTop, this.opacityBottom) {
     if (depth > 0) {
       colors = [
         colors[1],
@@ -55,8 +58,8 @@ class _ConcaveDecorationPainter extends BoxPainter {
       depth = -depth;
     }
     colors = [
-      colors[0].withOpacity(opacity),
-      colors[1].withOpacity(opacity),
+      colors[0].withOpacity(opacityTop),
+      colors[1].withOpacity(opacityBottom),
     ];
   }
 
