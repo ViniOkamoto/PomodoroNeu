@@ -53,13 +53,13 @@ class _SettingButtonState extends State<SettingButton>
         decoration: _isPressed
             ? secundaryInnerShadow(
           bottomColor: this.widget.isDark ? whiteShadow30Dark : whiteShadow100Light,
-          topColor: this.widget.isDark ? blackShadow30Dark : blackShadow10Light
+          topColor: this.widget.isDark ? blackShadow30Dark : blackShadow25Light
         )
             : tertiaryDropShadow(
                 shape: BoxShape.circle,
                 colorWidget: this.widget.isDark ? blackColor : whiteColor,
                 bottomColor:
-                    this.widget.isDark ? blackShadow30Dark : blackShadow10Light,
+                    this.widget.isDark ? blackShadow30Dark : blackShadow25Light,
                 topColor:
                     this.widget.isDark ? whiteShadow30Dark : whiteShadow100Light,
               ),
