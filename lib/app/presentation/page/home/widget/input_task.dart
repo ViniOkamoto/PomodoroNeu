@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/app/presentation/viewmodel/theme/theme_store.dart';
+import 'package:pomodoroapp/app/presentation/store/home/home_store.dart';
+import 'package:pomodoroapp/app/presentation/store/theme/theme_store.dart';
 import 'package:pomodoroapp/app/presentation/widget/app_button.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 import 'package:pomodoroapp/core/values/styles.dart';
@@ -10,11 +11,13 @@ class InputTask extends StatelessWidget {
     @required this.sizeHeight,
     @required this.size,
     @required this.themeStore,
+    @required this.homeStore,
   }) : super(key: key);
 
   final double sizeHeight;
   final Size size;
   final ThemeStore themeStore;
+  final HomeStore homeStore;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +30,16 @@ class InputTask extends StatelessWidget {
             margin: EdgeInsets.only(right: size.width * 0.019),
             width: size.width * 0.67,
             height: size.width * 0.13,
-            decoration: inputInnerShadow(
+            decoration: primaryInnerShadow(
                 bottomColor: themeStore.isDark
                     ? whiteShadow30Dark
                     : whiteShadow100Light,
                 topColor: themeStore.isDark
                     ? blackShadow30Dark
-                    : blackShadow10Light),
+                    : blackShadow25Light
+            ),
             child: TextField(
+              controller: homeStore.todoInputController,
               decoration: new InputDecoration(
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -56,7 +61,7 @@ class InputTask extends StatelessWidget {
             themeStore: themeStore,
             icon: Icons.add,
             iconColor: orangeColor,
-            onTap: (){},
+            onTap: homeStore.addTodo,
             size: size,
             iconSize: size.width * 0.09,
           )

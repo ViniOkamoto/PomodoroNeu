@@ -24,7 +24,7 @@ class CircleCounter extends CustomPainter{
   void paint(Canvas canvas, Size size) {
     Paint paint = new Paint()
       ..color = backgroundColor
-      ..strokeWidth = 15.0
+      ..strokeWidth = 13.0
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
     canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);

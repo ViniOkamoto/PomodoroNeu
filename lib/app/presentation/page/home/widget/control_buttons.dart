@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/app/presentation/viewmodel/theme/theme_store.dart';
+import 'package:pomodoroapp/app/presentation/store/theme/theme_store.dart';
 import 'package:pomodoroapp/app/presentation/widget/app_button.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 
