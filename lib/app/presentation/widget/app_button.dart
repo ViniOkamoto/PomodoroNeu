@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/app/presentation/viewmodel/theme/theme_store.dart';
+import 'package:pomodoroapp/app/presentation/store/theme/theme_store.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 import 'package:pomodoroapp/core/values/styles.dart';
 
@@ -39,7 +39,7 @@ class AppButton extends StatelessWidget {
           topColor:
           themeStore.isDark ? whiteShadow30Dark : whiteShadow100Light,
           bottomColor:
-          themeStore.isDark ? blackShadow30Dark : blackShadow10Light,
+          themeStore.isDark ? blackShadow30Dark : blackShadow25Light,
         ),
         child: Icon(
           icon,

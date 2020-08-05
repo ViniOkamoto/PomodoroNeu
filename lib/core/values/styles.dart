@@ -44,10 +44,10 @@ tertiaryDropShadow(
       ]);
 }
 
-inputInnerShadow({topColor, bottomColor}) {
+primaryInnerShadow({topColor, bottomColor, double radius = 50}) {
   return ConcaveDecoration(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(radius),
       ),
       colors: [bottomColor, topColor],
       depth: 4,
@@ -55,10 +55,9 @@ inputInnerShadow({topColor, bottomColor}) {
       opacityBottom: 0.8);
 }
 
-listInnerShadow({topColor, bottomColor}) {
+CounterInnerShadow({topColor, bottomColor, double radius = 50}) {
   return ConcaveDecoration(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
+      shape: CircleBorder(
       ),
       colors: [bottomColor, topColor],
       depth: 4,

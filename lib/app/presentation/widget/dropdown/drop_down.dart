@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/app/presentation/viewmodel/theme/theme_store.dart';
+import 'package:pomodoroapp/app/presentation/store/theme/theme_store.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class DropDown extends StatelessWidget {
                   offset: Offset(-1, -1),
                   blurRadius: 4),
               BoxShadow(
-                  color: isDark ? blackShadow30Dark : blackShadow10Light,
+                  color: isDark ? blackShadow30Dark : blackShadow25Light,
                   offset: Offset(1, 1),
                   blurRadius: 4),
             ],
