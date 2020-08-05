@@ -31,7 +31,6 @@ class _HomePageState extends State<HomePage> {
     Item(done: false, task: "comer pudim"),
     Item(done: false, task: "fazer paçoca"),
     Item(done: false, task: "fazer sei lá"),
-    Item(done: false, task: "fazer isso aqui"),
     Item(done: false, task: "fazer paçoca"),
     Item(done: false, task: "fazer isso aqui"),
     Item(done: false, task: "fazer isso aqui"),
