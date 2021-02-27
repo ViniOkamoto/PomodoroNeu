@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:mobx/mobx.dart';
 import 'package:pomodoroapp/app/presentation/page/home/widget/circle_counter.dart';
 import 'package:pomodoroapp/app/presentation/store/theme/theme_store.dart';
+import 'package:pomodoroapp/core/di/service_locator.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 import 'package:pomodoroapp/core/values/styles.dart';
 
 class CounterPomodoro extends StatefulWidget {
-  final ThemeStore themeStore;
-
-  CounterPomodoro({@required this.themeStore});
-
   @override
   _CounterPomodoroState createState() => _CounterPomodoroState();
 }
 
 class _CounterPomodoroState extends State<CounterPomodoro>
     with TickerProviderStateMixin {
-  List<ReactionDisposer> _disposers;
+  final ThemeStore _themeStore = serviceLocator<ThemeStore>();
   AnimationController controller;
 
   String get timerString {
@@ -47,12 +43,10 @@ class _CounterPomodoroState extends State<CounterPomodoro>
             width: size.width * 0.83,
             height: size.width * 0.83,
             decoration: mainDropShadow(
-                colorWidget:
-                    this.widget.themeStore.isDark ? blackColor : whiteColor,
-                bottomColor: this.widget.themeStore.isDark
-                    ? blackShadow30Dark
-                    : blackShadow30Light,
-                topColor: this.widget.themeStore.isDark
+                colorWidget: _themeStore.isDark ? blackColor : whiteColor,
+                bottomColor:
+                    _themeStore.isDark ? blackShadow30Dark : blackShadow30Light,
+                topColor: _themeStore.isDark
                     ? whiteShadow30Dark
                     : whiteShadow100Light),
           ),
@@ -60,12 +54,10 @@ class _CounterPomodoroState extends State<CounterPomodoro>
             width: size.width * 0.83,
             height: size.width * 0.83,
             decoration: mainDropShadow(
-                colorWidget:
-                    this.widget.themeStore.isDark ? blackColor : whiteColor,
-                bottomColor: this.widget.themeStore.isDark
-                    ? blackShadow30Dark
-                    : blackShadow30Light,
-                topColor: this.widget.themeStore.isDark
+                colorWidget: _themeStore.isDark ? blackColor : whiteColor,
+                bottomColor:
+                    _themeStore.isDark ? blackShadow30Dark : blackShadow30Light,
+                topColor: _themeStore.isDark
                     ? whiteShadow30Dark
                     : whiteShadow100Light),
           ),
@@ -89,12 +81,10 @@ class _CounterPomodoroState extends State<CounterPomodoro>
             width: size.width * 0.703,
             height: size.width * 0.703,
             decoration: mainDropShadow(
-                colorWidget:
-                    this.widget.themeStore.isDark ? blackColor : whiteColor,
-                bottomColor: this.widget.themeStore.isDark
-                    ? blackShadow30Dark
-                    : blackShadow30Light,
-                topColor: this.widget.themeStore.isDark
+                colorWidget: _themeStore.isDark ? blackColor : whiteColor,
+                bottomColor:
+                    _themeStore.isDark ? blackShadow30Dark : blackShadow30Light,
+                topColor: _themeStore.isDark
                     ? whiteShadow30Dark
                     : whiteShadow100Light),
             child: Column(
@@ -108,7 +98,7 @@ class _CounterPomodoroState extends State<CounterPomodoro>
                         "00:30:00",
                         style: TextStyle(
                             fontSize: 40,
-                            color: this.widget.themeStore.isDark
+                            color: _themeStore.isDark
                                 ? darkTextCounterGreyColor
                                 : lightTextCounterGreyColor,
                             letterSpacing: -1,
@@ -132,18 +122,17 @@ class _CounterPomodoroState extends State<CounterPomodoro>
                   child: Container(
                     margin: EdgeInsets.only(bottom: 30),
                     padding: EdgeInsets.only(left: 8),
-                    width: 150,
-                    height: 50,
+                    width: size.width * 0.4,
+                    height: size.width * 0.12,
                     decoration: tertiaryDropShadow(
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(15),
-                        colorWidget: this.widget.themeStore.isDark
-                            ? blackColor
-                            : whiteColor,
-                        bottomColor: this.widget.themeStore.isDark
+                        colorWidget:
+                            _themeStore.isDark ? blackColor : whiteColor,
+                        bottomColor: _themeStore.isDark
                             ? blackShadow30Dark
                             : blackShadow25Light,
-                        topColor: this.widget.themeStore.isDark
+                        topColor: _themeStore.isDark
                             ? whiteShadow30Dark
                             : whiteShadow100Light),
                     child: Row(
@@ -161,22 +150,16 @@ class _CounterPomodoroState extends State<CounterPomodoro>
                             style: TextStyle(
                                 color: greyLightTextColor, fontSize: 15),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
         ],
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    _disposers.forEach((disposer) => disposer());
-    super.dispose();
   }
 }

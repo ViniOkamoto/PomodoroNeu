@@ -1,10 +1,8 @@
-
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/core/values/colors.dart';
 
-class CircleCounter extends CustomPainter{
+class CircleCounter extends CustomPainter {
   CircleCounter({
     @required this.animation,
     @required this.backgroundColor,

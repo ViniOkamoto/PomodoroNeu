@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pomodoroapp/app/presentation/store/theme/theme_store.dart';
+import 'package:pomodoroapp/core/di/service_locator.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
-import 'package:provider/provider.dart';
 
 class DropDown extends StatelessWidget {
   final double itemHeight;
-
+  ThemeStore _themeStore = serviceLocator<ThemeStore>();
   DropDown({Key key, this.itemHeight}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    ThemeStore _themeStore = Provider.of<ThemeStore>(context);
     bool isDark = _themeStore.isDark;
     return Column(
       children: <Widget>[
@@ -41,7 +40,7 @@ class DropDown extends StatelessWidget {
                 GestureDetector(
                   onTap: _themeStore.switchLightTheme,
                   child: Icon(
-                      Icons.brightness_high,
+                    Icons.brightness_high,
                     color: orangeColor,
                   ),
                 ),

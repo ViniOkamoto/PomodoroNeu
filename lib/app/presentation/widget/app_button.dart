@@ -10,43 +10,47 @@ class AppButton extends StatelessWidget {
     @required this.size,
     @required this.themeStore,
     @required this.icon,
+    this.isPressed = false,
     this.width,
     this.height,
-    this.iconColor,
-    this.iconSize,
   }) : super(key: key);
 
   final Size size;
   final ThemeStore themeStore;
   final Function onTap;
-  final IconData icon;
-  final double iconSize;
-  final Color iconColor;
+  final Widget icon;
   final width;
   final height;
+  final bool isPressed;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: width,
-        height: height,
-        decoration: secondaryDropShadow(
-          borderRadius: BorderRadius.circular(10),
-          shape: BoxShape.rectangle,
-          colorWidget: themeStore.isDark ? blackColor : whiteColor,
-          topColor:
-          themeStore.isDark ? whiteShadow30Dark : whiteShadow100Light,
-          bottomColor:
-          themeStore.isDark ? blackShadow30Dark : blackShadow25Light,
-        ),
-        child: Icon(
-          icon,
-          size: iconSize,
-          color: iconColor,
-        ),
-      ),
+          width: width,
+          height: height,
+          decoration: isPressed
+              ? secundaryInnerShadow(
+                  bottomColor: themeStore.isDark
+                      ? whiteShadow30Dark
+                      : whiteShadow100Light,
+                  topColor: themeStore.isDark
+                      ? blackShadow30Dark
+                      : blackShadow25Light,
+                  radius: 10.0)
+              : secondaryDropShadow(
+                  borderRadius: BorderRadius.circular(10),
+                  shape: BoxShape.rectangle,
+                  colorWidget: themeStore.isDark ? blackColor : whiteColor,
+                  topColor: themeStore.isDark
+                      ? whiteShadow30Dark
+                      : whiteShadow100Light,
+                  bottomColor: themeStore.isDark
+                      ? blackShadow30Dark
+                      : blackShadow25Light,
+                ),
+          child: icon),
     );
   }
 }

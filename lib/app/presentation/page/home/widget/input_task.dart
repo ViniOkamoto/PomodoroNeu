@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:pomodoroapp/app/presentation/store/home/home_store.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pomodoroapp/app/presentation/store/theme/theme_store.dart';
+import 'package:pomodoroapp/app/presentation/store/todo/todo_store.dart';
 import 'package:pomodoroapp/app/presentation/widget/app_button.dart';
+import 'package:pomodoroapp/core/di/service_locator.dart';
 import 'package:pomodoroapp/core/values/colors.dart';
 import 'package:pomodoroapp/core/values/styles.dart';
 
 class InputTask extends StatelessWidget {
-  const InputTask({
-    Key key,
-    @required this.sizeHeight,
-    @required this.size,
-    @required this.themeStore,
-    @required this.homeStore,
-  }) : super(key: key);
-
-  final double sizeHeight;
-  final Size size;
-  final ThemeStore themeStore;
-  final HomeStore homeStore;
-
+  final ThemeStore _themeStore = serviceLocator<ThemeStore>();
+  final TodoStore _todoStore = serviceLocator<TodoStore>();
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var sizeHeight = (MediaQuery.of(context).size.height - 80) -
+        MediaQuery.of(context).padding.top;
     return Padding(
       padding: EdgeInsets.only(top: sizeHeight * 0.03),
       child: Row(
@@ -34,7 +28,7 @@ class InputTask extends StatelessWidget {
                 bottomColor: themeStore.isDark ? whiteShadow30Dark : whiteShadow100Light,
                 topColor: themeStore.isDark ? blackShadow30Dark : blackShadow25Light),
             child: TextField(
-              controller: homeStore.todoInputController,
+              controller: _todoStore.todoInputController,
               decoration: new InputDecoration(
                 border: InputBorder.none,
                 focusedBorder: InputBorder.none,
@@ -47,16 +41,24 @@ class InputTask extends StatelessWidget {
               ),
             ),
           ),
-          AppButton(
-            height: size.width * 0.12,
-            width: size.width * 0.12,
-            themeStore: themeStore,
-            icon: Icons.add,
-            iconColor: orangeColor,
-            onTap: homeStore.addTodo,
-            size: size,
-            iconSize: size.width * 0.09,
-          )
+          Observer(builder: (context) {
+            return AppButton(
+              isPressed: _todoStore.isPressedTodoButton,
+              height: size.width * 0.12,
+              width: size.width * 0.12,
+              themeStore: _themeStore,
+              icon: Icon(
+                Icons.add,
+                size: size.width * 0.09,
+                color: orangeColor,
+              ),
+              onTap: () {
+                _todoStore.setPressedTodoButton();
+                _todoStore.addTodo();
+              },
+              size: size,
+            );
+          })
         ],
       ),
     );

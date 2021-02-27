@@ -55,22 +55,22 @@ primaryInnerShadow({topColor, bottomColor, double radius = 50}) {
       opacityBottom: 0.8);
 }
 
-CounterInnerShadow({topColor, bottomColor, double radius = 50}) {
+circleInnerShadow({topColor, bottomColor, depth = 4.0}) {
   return ConcaveDecoration(
-      shape: CircleBorder(
-      ),
+      shape: CircleBorder(),
       colors: [bottomColor, topColor],
-      depth: 4,
+      depth: depth,
       opacityTop: 0.3,
       opacityBottom: 0.8);
 }
-secundaryInnerShadow({topColor, bottomColor}) {
+
+secundaryInnerShadow({topColor, bottomColor, radius}) {
   return ConcaveDecoration(
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(50),
+      borderRadius: BorderRadius.circular(radius),
     ),
     colors: [bottomColor, topColor],
-    depth: 7,
+    depth: 7.0,
     opacityTop: 0.3,
     opacityBottom: 0.3,
   );

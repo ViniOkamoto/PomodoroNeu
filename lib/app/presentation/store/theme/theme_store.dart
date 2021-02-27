@@ -10,6 +10,9 @@ class ThemeStore = _ThemeStore with _$ThemeStore;
 abstract class _ThemeStore with Store {
   ThemeUseCase _themeUseCase = serviceLocator<ThemeUseCase>();
 
+  _ThemeStore() {
+    getTheme();
+  }
   @computed
   bool get isDark => theme.brightness == Brightness.dark;
 

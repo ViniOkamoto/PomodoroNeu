@@ -44,24 +44,26 @@ class _SettingButtonState extends State<SettingButton>
             Overlay.of(context).insert(floatingDropDown);
           }
           _isPressed = !_isPressed;
-        }
-        );
+        });
       },
       child: Container(
         width: 50,
         height: 50,
         decoration: _isPressed
-            ? secundaryInnerShadow(
-          bottomColor: this.widget.isDark ? whiteShadow30Dark : whiteShadow100Light,
-          topColor: this.widget.isDark ? blackShadow30Dark : blackShadow25Light
-        )
+            ? circleInnerShadow(
+                bottomColor: this.widget.isDark
+                    ? whiteShadow30Dark
+                    : whiteShadow100Light,
+                topColor:
+                    this.widget.isDark ? blackShadow30Dark : blackShadow25Light)
             : tertiaryDropShadow(
                 shape: BoxShape.circle,
                 colorWidget: this.widget.isDark ? blackColor : whiteColor,
                 bottomColor:
                     this.widget.isDark ? blackShadow30Dark : blackShadow25Light,
-                topColor:
-                    this.widget.isDark ? whiteShadow30Dark : whiteShadow100Light,
+                topColor: this.widget.isDark
+                    ? whiteShadow30Dark
+                    : whiteShadow100Light,
               ),
         child: Icon(
           Icons.settings,
