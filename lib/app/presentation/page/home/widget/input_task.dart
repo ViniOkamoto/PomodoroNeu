@@ -31,13 +31,8 @@ class InputTask extends StatelessWidget {
             width: size.width * 0.67,
             height: size.width * 0.13,
             decoration: primaryInnerShadow(
-                bottomColor: themeStore.isDark
-                    ? whiteShadow30Dark
-                    : whiteShadow100Light,
-                topColor: themeStore.isDark
-                    ? blackShadow30Dark
-                    : blackShadow25Light
-            ),
+                bottomColor: themeStore.isDark ? whiteShadow30Dark : whiteShadow100Light,
+                topColor: themeStore.isDark ? blackShadow30Dark : blackShadow25Light),
             child: TextField(
               controller: homeStore.todoInputController,
               decoration: new InputDecoration(
@@ -47,11 +42,8 @@ class InputTask extends StatelessWidget {
                 errorBorder: InputBorder.none,
                 disabledBorder: InputBorder.none,
                 hintText: "Adicionar nova tarefa",
-                hintStyle: TextStyle(
-                    fontSize: size.width * 0.046
-                ),
-                contentPadding:
-                EdgeInsets.only(left: 15, bottom: 0, top: 11, right: 15),
+                hintStyle: TextStyle(fontSize: size.width * 0.046),
+                contentPadding: EdgeInsets.only(left: 15, bottom: 5, top: 11, right: 15),
               ),
             ),
           ),
